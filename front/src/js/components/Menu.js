@@ -1,5 +1,4 @@
-import styles from './Main.css';
-import Test from './Test';
+import styles from './Menu.css';
 
 @CSSModules(styles)
 export default class Main extends React.Component {
@@ -9,8 +8,8 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <div styleName="main">
-        <Test />
+      <div styleName="menu">
+        menu dayo
       </div>
     );
   }

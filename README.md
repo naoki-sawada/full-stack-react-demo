@@ -1,22 +1,15 @@
-# React-Moducks
+# full-stack-react-demo
 
 ## About
-This is the sample project of [React](https://facebook.github.io/react/), [Moducks](https://github.com/moducks/moducks).
+
+Example code of this [udemy lesson](https://www.udemy.com/share/1hbyk/)
 
 ## Requirements
 
-* Node.js v8.6.0 or higher
+## Install
 
 ## Usage
 
-After clone this project, on the project root directory,
+## Licence
 
-```
-$ npm install 
-(or yarn)
-$ npm start
-```
-
-## License
-
-MIT License.
+MIT.
