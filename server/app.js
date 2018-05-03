@@ -12,14 +12,17 @@ db.on('error', console.error.bind(console, '# MongoDB - connection error: '));
 
 const app = new Koa();
 
+app.keys = config.app.keys;
 app.use(cors());
-app.keys = config.keys;
 app.use(router.routes());
 app.use(router.allowedMethods());
-app.use(session({ store: new MongooseStore() }, app));
+app.use(session({
+  // store: MongooseStore.create(),
+}, app));
 
-app.use(async ctx => {
+app.use(async (ctx) => {
   const { session } = ctx;
+  console.log('=================', session);
   let n = session.views || 0;
   session.views = ++n;
   ctx.body = `${n} view(s)`;
