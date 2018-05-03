@@ -7,53 +7,23 @@ const router = Router();
 export default router
   .post('/', bodyParser(), async (ctx) => {
     const book = ctx.request.body;
-    const result = ctx;
-
-    Books.create(book, (err, books) => {
-      if (err) {
-        throw err;
-      }
-      result.body = books;
-    });
+    const newBooks = new Books(book);
+    const savedBooks = await newBooks.save();
+    ctx.body = savedBooks;
   })
   .get('/', bodyParser(), async (ctx) => {
-    Books.find((err, books) => {
-      if (err) {
-        throw err;
-      }
-      result.body = books;
-    });
+    const books = await Books.find({});
+    ctx.body = books;
   })
   .delete('/:_id', bodyParser(), async (ctx) => {
-    const query = { _id: ctx.request.params._id };
-
-    Books.remove(query, (err, books) => {
-      if(err) {
-        console.log("# API DELETE BOOKS: ", err);
-      }
-      result.body = books;
-    });
+    const id = ctx.params._id;
+    const book = await Books.findById(id);
+    const deletedBook = await book.remove();
+    ctx.body = deletedBook;
   })
   .put('/:_id', bodyParser(), async (ctx) => {
     const book = ctx.request.body;
-    const query = ctx.request.params._id;
-
-    const update = {
-      '$set':{
-        title:book.title,
-        description:book.description,
-        image:book.image,
-        price:book.price
-      }
-    };
-    const options = { new: true };
-
-    console.log(update, options);
-
-    // Books.findOneAndUpdate(query, update, options, (err, books) => {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   rresult.body = books;
-    // });
+    const id = ctx.params._id;
+    const updatedBook = await Books.findByIdAndUpdate(id, book);
+    ctx.body = updatedBook;
   });
