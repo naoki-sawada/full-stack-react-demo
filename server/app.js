@@ -22,7 +22,7 @@ app.use(session({
 
 app.use(async (ctx) => {
   const { session } = ctx;
-  console.log('=================', session);
+  // console.log('=================', session);
   let n = session.views || 0;
   session.views = ++n;
   ctx.body = `${n} view(s)`;

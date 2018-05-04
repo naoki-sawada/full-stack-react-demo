@@ -6,6 +6,7 @@ import books from './books';
 
 const router = new Router();
 
+// router.prefix('/v1');
 router.use(cookie());
 router.use('/cart', cart.routes(), cart.allowedMethods());
 router.use('/images', images.routes(), images.allowedMethods());
