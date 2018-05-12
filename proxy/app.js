@@ -1,24 +1,30 @@
-const express = require('express');
-const path = require('path');
-const httpProxy = require('http-proxy');
+import Koa from 'koa';
+import Router from 'koa-router';
+import serve from 'koa-static';
+import mount from 'koa-mount';
+import proxy from 'koa-proxy';
+import fs from 'fs';
+import util from 'util';  
 
 const filePath = `${__dirname}/../front/www`;
 
-const app = express();
+const readFile = util.promisify(fs.readFile);
 
-const apiProxy = httpProxy.createProxyServer({
-  target:"http://localhost:3001",
-});
-app.use('/api', (req, res) => {
-  apiProxy.web(req, res);
-});
+const api = new Koa();
+api.use(proxy({
+  host: 'http://localhost:3001',
+}));
 
-app.use(express.static(filePath));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(filePath, 'index.html'));
+const router = new Router();
+router.get('*', async (ctx) => {
+  ctx.body = await readFile(`${filePath}/index.html`, 'utf-8');
 });
 
-app.listen(3000, () => {
-  console.log('app is listening on port 3000');
-});
+const app = new Koa();
+
+app.use(serve(filePath));
+app.use(mount('/api', api));
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+app.listen(3000);
