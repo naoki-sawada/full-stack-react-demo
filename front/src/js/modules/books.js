@@ -1,4 +1,6 @@
+import { call } from 'redux-saga/effects';
 import { createModule } from 'moducks';
+import { bookshop } from '../utils/apis';
 
 const defaultState = {
   // books: [],
@@ -12,11 +14,20 @@ const defaultState = {
 
 export const {
   books, sagas,
-  getBooks, postBooks, postBookRejected,
+  setBooks, getBooks, postBooks, postBookRejected,
   resetButton, deleteBook, updateBook,
 } = createModule('books', {
-  GET_BOOKS: {
+  SET_BOOKS: {
     reducer: (state, action) => ({ ...state, books: action.payload }),
+  },
+  GET_BOOKS: {
+    saga: function* (action) {
+      const books = yield call(bookshop.getBooks);
+      return setBooks(Array.isArray(books) ? books : []);
+    },
+    onError: (e, action) => {
+      console.error(e, action);
+    },
   },
   POST_BOOK: {
     // reducer: state => ({ counter: state.counter - 1 }),

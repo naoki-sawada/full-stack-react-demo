@@ -1,26 +1,40 @@
+import { call } from 'redux-saga/effects';
 import { createModule } from 'moducks';
+import { bookshop } from '../utils/apis';
 
 const defaultState = {
-  counter: 0,
+  cart: {},
+  totalAmount: 0,
+  totalQty: 0,
 };
 
 export const {
-  test, sagas,
-  testIncrement, testDecrement, testClear,
+  cart, sagas,
+  getCart, postCart, 
+  addToCart, updateCart, deleteCartItem,
 } = createModule('cart', {
   GET_CART: {
-    reducer: state => ({ counter: state.counter + 1 }),
     saga: function* (action) {
-      console.log("increment!!!");
+      const cart = yield call(bookshop.getCart);
+      if (typeof cart === 'object') {
+        return updateCart(cart);
+      }
+    },
+  },
+  POST_CART: {
+    saga: function* (action) {
+      yield call(bookshop.postCart, action.payload);
     },
   },
   ADD_TO_CART: {
-    reducer: state => ({ counter: state.counter - 1 }),
+    // reducer: state => ({ ...state }),
+    saga: function* (action) {
+    },
   },
   UPDATE_CART: {
-    reducer: state => ({ ...defaultState }),
+    reducer: (state, action) => ({ ...state, cart: action.payload }),
   },
   DELETE_CART_ITEM: {
-    reducer: state => ({ ...state }),
+    reducer: state => ({ ...defaultState }),
   },
 }, defaultState);

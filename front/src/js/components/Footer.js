@@ -8,9 +8,11 @@ export default class Footer extends React.Component {
 
   render() {
     return (
-      <div styleName="footer">
-        footer dayo
-      </div>
+      <footer styleName="footer">
+        <div styleName="container">
+          <p styleName="footerText">Copyright 2017 BooksShop. All rights reserved</p>
+        </div>
+      </footer>
     );
   }
 }
