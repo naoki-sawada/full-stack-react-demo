@@ -11,9 +11,10 @@ export default router
     ctx.body = session.cart;
   })
   .get('/', bodyParser(), async (ctx) => {
-    console.log(ctx);
-    const { session } = ctx;
-    if (typeof session.cart !== 'undefined') {
-      ctx.body = session.cart;
+    const { session: { cart } } = ctx;
+    if (cart) {
+      ctx.body = cart;
+    } else {
+      ctx.body = {};
     }
   });
