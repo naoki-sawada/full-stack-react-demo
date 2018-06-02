@@ -1,6 +1,9 @@
+import Header from 'grommet/components/Header';
+import Title from 'grommet/components/Title';
+import Box from 'grommet/components/Box';
 import styles from './Menu.css';
 
-@CSSModules(styles)
+// @CSSModules(styles)
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -8,9 +11,16 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <div styleName="menu">
-        menu dayo
-      </div>
+      <Header>
+        <Title>
+          Sample Title
+        </Title>
+        <Box flex={true}
+          justify='end'
+          direction='row'
+          responsive={false}>
+        </Box>
+      </Header>
     );
   }
 }

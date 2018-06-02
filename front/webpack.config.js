@@ -14,7 +14,7 @@ module.exports = {
       path.join(__dirname, "src/js"),
       "node_modules",
     ],
-    extensions: ['.js'],
+    extensions: ['.js', '.scss'],
   },
   module: {
     rules: [
@@ -35,6 +35,20 @@ module.exports = {
       {
         test: /\.(jpg|png|gif)$/,
         use: 'file-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          { loader: 'file-loader', options: { name: '../assets/css/[name].css' } },
+          { loader: 'sass-loader',
+            options: {
+              outputStyle: 'compressed',
+              includePaths: [
+                './node_modules'
+              ]
+            }
+          }
+        ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
