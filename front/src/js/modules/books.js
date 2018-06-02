@@ -14,7 +14,7 @@ const defaultState = {
 
 export const {
   books, sagas,
-  setBooks, getBooks, postBooks, postBookRejected,
+  setBooks, getBooks, postBook, postBookRejected,
   resetButton, deleteBook, updateBook,
 } = createModule('books', {
   SET_BOOKS: {
@@ -30,9 +30,11 @@ export const {
     },
   },
   POST_BOOK: {
-    // reducer: state => ({ counter: state.counter - 1 }),
     saga: function* (action) {
-      // POST logic
+      const books = yield call(bookshop.postBooks, action.payload);
+    },
+    onError: (e, action) => {
+      console.error(e, action);
     },
   },
   POST_BOOK_REJECTED: {

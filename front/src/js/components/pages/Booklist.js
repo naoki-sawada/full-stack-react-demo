@@ -1,40 +1,73 @@
+import Columns from 'grommet/components/Columns';
+import Card from 'grommet/components/Card';
+import Box from 'grommet/components/Box';
+import Image from 'grommet/components/Image';
+import Button from 'grommet/components/Button';
+import NumberInput from 'grommet/components/NumberInput';
 import { connect } from 'react-redux';
-import styles from './BookList.css';
 import { getBooks } from '~/modules/books';
+import { getCart, postCart } from '~/modules/cart';
 
 @connect(state => ({
   books: state.books.books,
+  cart: state.cart.cart,
 }), {
   getBooks,
+  getCart,
+  postCart,
 })
-@CSSModules(styles)
 export default class BookList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
+    this.addCart = this.addCart.bind(this);
+    this.numInput = this.numInput.bind(this);
   }
 
   componentDidMount(){
+    this.props.getCart();
     this.props.getBooks();
+  }
+
+  numInput(event) {
+    this.setState({ [event.target.id]: event.target.value });
+  }
+
+  addCart(event) {
+    console.log(event.target.id);
+    console.log(this.state);
   }
 
   render() {
     const bookList = [];
     this.props.books.forEach((elem, index) => {
-      const { title, description, images, price } = elem;
+      const { title, description, images, price, _id } = elem;
       bookList.push(
-        <div key={index}>
-          <h1>Title: {title}</h1>
-          <p>Description: {description}</p>
-          <p>Price: {price}</p>
-          <img src={images[0]}/>
-        </div>
+        <Box
+          pad="medium" >
+          {/* <Image src={images} /> */}
+          <h2>{title}</h2>
+          <p>{description}</p>
+          <p>{`¥${price}`}</p>
+          <hr />
+          <NumberInput
+            id={_id}
+            onChange={this.numInput}
+            min={0} />
+          <br />
+          <Button
+            id={_id}
+            label="Add"
+            primary={true}
+            onClick={this.addCart} />
+        </Box>
       );
     });
 
     return (
-      <div styleName="bookList">
+      <Columns>
         {bookList}
-      </div>
+      </Columns>
     );
   }
 }

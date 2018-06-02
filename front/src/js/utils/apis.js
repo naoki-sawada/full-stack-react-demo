@@ -18,6 +18,20 @@ export const bookshop = {
       throw new Error(e);
     }
   },
+  async postBooks(data) {
+    try {
+      const instance = axios.create({
+        baseURL: BASE_URL,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const response= await instance.post('/books', data);
+      console.log(response);
+    } catch (e) {
+      throw new Error(e);
+    }
+  },
   async getCart() {
     try {
       const instance = axios.create({

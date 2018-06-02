@@ -4,9 +4,7 @@ import Box from 'grommet/components/Box';
 import Paragraph from 'grommet/components/Paragraph';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
-import styles from './SiteFooter.css';
 
-@CSSModules(styles)
 export default class SiteFooter extends React.Component {
   constructor(props) {
     super(props);
@@ -14,14 +12,9 @@ export default class SiteFooter extends React.Component {
 
   render() {
     return (
-      // <footer styleName="footer">
-      //   <div styleName="container">
-      //     <p styleName="footerText">Copyright 2017 BooksShop. All rights reserved</p>
-      //   </div>
-      // </footer>
       <Footer justify='between'>
       <Title>
-        BookShop
+        {/* BookShop */}
       </Title>
       <Box direction='row'
         align='center'

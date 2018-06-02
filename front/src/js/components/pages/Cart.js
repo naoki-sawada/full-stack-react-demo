@@ -1,5 +1,5 @@
+import Button from 'grommet/components/Button';
 import { connect } from 'react-redux';
-import styles from './Cart.css';
 import { getCart, postCart } from '~/modules/cart';
 
 @connect(state => ({
@@ -8,7 +8,6 @@ import { getCart, postCart } from '~/modules/cart';
   getCart,
   postCart,
 })
-@CSSModules(styles)
 export default class Cart extends React.Component {
   constructor(props) {
     super(props);
@@ -30,9 +29,14 @@ export default class Cart extends React.Component {
     console.log(this.props.cart);
     return (
       <div styleName="cart">
-        cart
-        <button onClick={(e) => { this.props.postCart(postData) }}>test</button>
-        <button onClick={(e) => { this.props.getCart() }}>get test</button>
+        <Button
+          label="Post Cart"
+          onClick={(e) => { this.props.postCart(postData) }}
+          primary={true} />
+        <Button
+          label="Get Cart"
+          onClick={(e) => { this.props.getCart() }}
+          primary={true} />
       </div>
     );
   }
