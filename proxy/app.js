@@ -4,7 +4,8 @@ import serve from 'koa-static';
 import mount from 'koa-mount';
 import proxy from 'koa-proxy';
 import fs from 'fs';
-import util from 'util';  
+import util from 'util'; 
+import config from 'config'; 
 
 const filePath = `${__dirname}/../front/www`;
 
@@ -12,7 +13,7 @@ const readFile = util.promisify(fs.readFile);
 
 const api = new Koa();
 api.use(proxy({
-  host: 'http://localhost:3001',
+  host: config.proxy.host,
 }));
 
 const router = new Router();

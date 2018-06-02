@@ -1,0 +1,48 @@
+version: '3'
+services:
+  mongo:
+    restart: always
+    image: mongo:3.6.5
+    volumes:
+      - ./db:/data/db
+    container_name: full_stack_react_mongo
+
+  redis:
+    restart: always
+    image: redis:alpine
+    container_name: full_stack_react_redis
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: full_stack_react_server
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    links:
+      - mongo
+      - redis
+    environment:
+      PORT: 3001
+      NODE_ENV: docker
+
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    container_name: full_stack_react_proxy
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./proxy:/app
+      - /app/node_modules
+      - ./front:/front
+    links:
+      - server
+    environment:
+      PORT: 3000
+      NODE_ENV: docker
+
