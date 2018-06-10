@@ -39,10 +39,22 @@ services:
     volumes:
       - ./proxy:/app
       - /app/node_modules
-      - ./front:/front
+      - static-content:/front/www
     links:
       - server
     environment:
       PORT: 3000
       NODE_ENV: docker
 
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: full_stack_react_front
+    volumes:
+      - static-content:/app/www
+    environment:
+      NODE_ENV: docker
+
+volumes:
+  static-content:
