@@ -8,7 +8,7 @@ import BooksList from './components/pages/Booklist';
 import Cart from './components/pages/Cart';
 import BooksForm from './components/pages/BooksForm';
 
-import Menu from './components/menu';
+import Menu from './components/Menu';
 import SiteFooter from './components/SiteFooter';
 
 const store = createStore({});

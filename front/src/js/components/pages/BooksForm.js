@@ -6,7 +6,7 @@ import TextInput from 'grommet/components/TextInput';
 import Footer from 'grommet/components/Footer';
 import Button from 'grommet/components/Button';
 import { connect } from 'react-redux';
-import { postBook } from '~/modules/cart';
+import { postBook } from '~/modules/books';
 
 @connect(state => ({
 }), {

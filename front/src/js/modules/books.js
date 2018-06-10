@@ -1,5 +1,5 @@
 import { call } from 'redux-saga/effects';
-import { createModule } from 'moducks';
+import moducks from './moducks';
 import { bookshop } from '../utils/apis';
 
 const defaultState = {
@@ -16,7 +16,7 @@ export const {
   books, sagas,
   setBooks, getBooks, postBook, postBookRejected,
   resetButton, deleteBook, updateBook,
-} = createModule('books', {
+} = moducks.createModule('books', {
   SET_BOOKS: {
     reducer: (state, action) => ({ ...state, books: action.payload }),
   },

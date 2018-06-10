@@ -1,4 +1,4 @@
-import { createModule } from 'moducks';
+import moducks from './moducks';
 
 const defaultState = {
   counter: 0,
@@ -7,7 +7,7 @@ const defaultState = {
 export const {
   test, sagas,
   testIncrement, testDecrement, testClear,
-} = createModule('test', {
+} = moducks.createModule('test', {
   TEST_INCREMENT: {
     reducer: state => ({ counter: state.counter + 1 }),
     saga: function* (action) {

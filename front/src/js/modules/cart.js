@@ -1,5 +1,5 @@
 import { call } from 'redux-saga/effects';
-import { createModule } from 'moducks';
+import moducks from './moducks';
 import { bookshop } from '../utils/apis';
 
 const defaultState = {
@@ -12,7 +12,7 @@ export const {
   cart, sagas,
   getCart, postCart, 
   addToCart, updateCart, deleteCartItem,
-} = createModule('cart', {
+} = moducks.createModule('cart', {
   GET_CART: {
     saga: function* (action) {
       const cart = yield call(bookshop.getCart);
