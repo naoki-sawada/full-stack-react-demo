@@ -22,8 +22,8 @@ export const {
   },
   GET_BOOKS: {
     saga: function* (action) {
-      const books = yield call(bookshop.getBooks);
-      return setBooks(Array.isArray(books) ? books : []);
+      const bookList = yield call(bookshop.getBooks);
+      return setBooks(Array.isArray(bookList) ? bookList : []);
     },
     onError: (e, action) => {
       console.error(e, action);
@@ -31,7 +31,7 @@ export const {
   },
   POST_BOOK: {
     saga: function* (action) {
-      const books = yield call(bookshop.postBooks, action.payload);
+      const bookList = yield call(bookshop.postBooks, action.payload);
     },
     onError: (e, action) => {
       console.error(e, action);

@@ -13,29 +13,29 @@ export default class SiteFooter extends React.Component {
   render() {
     return (
       <Footer justify='between'>
-      <Title>
-        {/* BookShop */}
-      </Title>
-      <Box direction='row'
-        align='center'
-        pad={{"between": "medium"}}>
-        <Paragraph margin='none'>
-          © 2018 bookshop
-        </Paragraph>
-        <Menu direction='row'
-          size='small'
-          dropAlign={{"right": "right"}}>
-          <Anchor href='#'>
-            Support
-          </Anchor>
-          <Anchor href='#'>
-            Contact
-          </Anchor>
-          <Anchor href='#'>
-            About
-          </Anchor>
-        </Menu>
-      </Box>
+        <Title>
+          {/* BookShop */}
+        </Title>
+        <Box direction='row'
+          align='center'
+          pad={{"between": "medium"}}>
+          <Paragraph margin='none'>
+            © 2018 bookshop
+          </Paragraph>
+          <Menu direction='row'
+            size='small'
+            dropAlign={{"right": "right"}}>
+            <Anchor href='#'>
+              Support
+            </Anchor>
+            <Anchor href='#'>
+              Contact
+            </Anchor>
+            <Anchor href='#'>
+              About
+            </Anchor>
+          </Menu>
+        </Box>
       </Footer>
     );
   }

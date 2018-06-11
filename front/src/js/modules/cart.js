@@ -15,9 +15,9 @@ export const {
 } = moducks.createModule('cart', {
   GET_CART: {
     saga: function* (action) {
-      const cart = yield call(bookshop.getCart);
-      if (typeof cart === 'object') {
-        return updateCart(cart);
+      const cartList = yield call(bookshop.getCart);
+      if (typeof cartList === 'object') {
+        return updateCart(cartList);
       }
     },
   },

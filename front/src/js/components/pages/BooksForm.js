@@ -29,9 +29,9 @@ export default class BooksForm extends React.Component {
 
   }
 
-  onDOMChange(arg) {
-    console.log(arg)
-  }
+  // onDOMChange(arg) {
+  //   console.log(arg)
+  // }
 
   render() {
     return (

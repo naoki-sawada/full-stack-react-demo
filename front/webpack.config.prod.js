@@ -34,6 +34,20 @@ module.exports = {
         }),
       },
       {
+        test: /\.scss$/,
+        use: [
+          { loader: 'file-loader', options: { name: '../assets/css/[name].css' } },
+          { loader: 'sass-loader',
+            options: {
+              outputStyle: 'compressed',
+              includePaths: [
+                './node_modules'
+              ]
+            }
+          }
+        ]
+      },
+      {
         test: /\.(jpg|png|gif)$/,
         use: 'file-loader',
       },
