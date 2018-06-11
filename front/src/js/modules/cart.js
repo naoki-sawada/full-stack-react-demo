@@ -1,6 +1,7 @@
 import { call, select, fork, put } from 'redux-saga/effects';
 import moducks from './moducks';
 import { bookshop } from '../utils/apis';
+import { setNotice, deleteNotice } from './notice';
 
 const defaultState = {
   cart: [],
@@ -66,9 +67,14 @@ export const {
 
       const result = yield call(bookshop.postCart, cartData);
       if (result.status === 200) {
+        const notice = yield select((state) => state.notice );
+        if (notice.status) {
+          yield deleteNotice();
+        }
+        yield setNotice({ status: 'ok', message: `${num} item added to cart!` });
         return updateCart(cartData);
       } else {
-        return updateCartFailed();
+        return setNotice({ status: 'critical', message: 'Add cart failed!' });
       }
     },
   },

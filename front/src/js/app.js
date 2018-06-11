@@ -8,6 +8,7 @@ import BooksList from './components/pages/Booklist';
 import Cart from './components/pages/Cart';
 import BooksForm from './components/pages/BooksForm';
 
+import Notice from './components/Notice';
 import Menu from './components/Menu';
 import SiteFooter from './components/SiteFooter';
 
@@ -17,6 +18,7 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Box pad='medium'>
+        <Notice />
         <Menu />
         <Switch>
             <Route exact path="/" component={BooksList}/>
