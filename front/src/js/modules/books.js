@@ -3,8 +3,8 @@ import moducks from './moducks';
 import { bookshop } from '../utils/apis';
 
 const defaultState = {
-  // books: [],
   books: [{
+    _id: "xxxxxxxxx",
     title: "hoge",
     description: "huga",
     price: 1280,

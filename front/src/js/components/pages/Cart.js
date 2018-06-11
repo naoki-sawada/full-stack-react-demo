@@ -22,10 +22,15 @@ export default class Cart extends React.Component {
 
   render() {
     const postData = {
-      cart: { book: 'aaaaaa' },
-      totalAmount: 2,
-      totalQty: 1000,
+      cart: [],
+      totalAmount: 0,
+      totalQty: 0,
     };
+    // const postData = {
+    //   cart: { book: 'aaaaaa' },
+    //   totalAmount: 2,
+    //   totalQty: 1000,
+    // };
     console.log(this.props.cart);
     return (
       <div styleName="cart">

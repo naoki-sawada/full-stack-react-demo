@@ -6,12 +6,13 @@ import Button from 'grommet/components/Button';
 import NumberInput from 'grommet/components/NumberInput';
 import { connect } from 'react-redux';
 import { getBooks } from '~/modules/books';
-import { getCart, postCart } from '~/modules/cart';
+import { addToCart, getCart, postCart } from '~/modules/cart';
 
 @connect(state => ({
   books: state.books.books,
   cart: state.cart.cart,
 }), {
+  addToCart,
   getBooks,
   getCart,
   postCart,
@@ -33,9 +34,13 @@ export default class BookList extends React.Component {
     this.setState({ [event.target.id]: event.target.value });
   }
 
-  addCart(event) {
-    console.log(event.target.id);
-    console.log(this.state);
+  addCart(event, price) {
+    if (event.target.id && price) {
+      const num = parseInt(this.state[event.target.id], 10);
+      if (num > 0) {
+        this.props.addToCart({ id: event.target.id, num, price });
+      }
+    }
   }
 
   render() {
@@ -59,7 +64,7 @@ export default class BookList extends React.Component {
             id={_id}
             label="Add"
             primary={true}
-            onClick={this.addCart} />
+            onClick={(e) => { this.addCart(e, price) }} />
         </Box>
       );
     });
